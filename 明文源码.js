@@ -141,12 +141,13 @@ export default {
 					case '/':
 						if (env.URL302) return Response.redirect(env.URL302, 302);
 						else if (env.URL) return await proxyURL(env.URL, url);
-						else return new Response(JSON.stringify(request.cf, null, 4), {
-							status: 200,
-							headers: {
-								'content-type': 'application/json',
-							},
-						});
+//						else return new Response(JSON.stringify(request.cf, null, 4), {
+//							status: 200,
+//							headers: {
+//								'content-type': 'application/json',
+//							},
+//						});
+						else return new Response('ok', { status: 200 });
 					case `/${fakeUserID}`:
 						const fakeConfig = await get特洛伊Config(password, request.headers.get('Host'), sub, 'CF-Workers-SUB', RproxyIP, url, fakeUserID, fakeHostName, env);
 						return new Response(`${fakeConfig}`, { status: 200 });
@@ -189,7 +190,7 @@ export default {
 					default:
 						if (env.URL302) return Response.redirect(env.URL302, 302);
 						else if (env.URL) return await proxyURL(env.URL, url);
-						else return new Response('不用怀疑！你PASSWORD就是错的！！！', { status: 404 });
+						else return new Response('ok', { status: 200 });
 				}
 			} else {
 				socks5Address = url.searchParams.get('socks5') || socks5Address;
